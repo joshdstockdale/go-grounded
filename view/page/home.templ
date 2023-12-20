@@ -1,0 +1,23 @@
+package page
+
+import (
+    "joshdstockdale/grounded/view/layout"
+	"joshdstockdale/grounded/model"
+	"joshdstockdale/grounded/view/component"
+)
+
+func getUser(c context.Context) string{
+    user, ok := c.Value("user").(string)
+    if !ok {
+        return ""
+    }
+    return user
+}
+
+templ Index(user model.User) {
+    @layout.Base(user) {
+        <h1>Home</h1>
+        <h3>From middleware{getUser(ctx)}</h3>
+        @component.Input("text", "Hellp")
+    }
+}
